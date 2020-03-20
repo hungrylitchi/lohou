@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: lohou
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.0.201:3306/lohou?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      max-active: 10
+      max-wait: 10000
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+# mybatis mapper locations
+mybatis:
+  mapper-locations:
+    - classpath*:mapper/*/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}

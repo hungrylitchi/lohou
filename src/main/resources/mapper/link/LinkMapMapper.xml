@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.litchi.cool.lohou.link.mapper.LinkMapMapper">
+    <!--    <resultMap id="FullResultMap" type="com.baidu.finance.licai.engine.entity.account.FullUserOpenAccountRequestInfo">
+            <id column="F_id" property="fId" jdbcType="BIGINT"/>
+            <result column="F_enabled" property="fEnabled" jdbcType="TINYINT"/>
+            <result column="F_application_no" property="fApplicationNo" jdbcType="VARCHAR"/>
+            <result column="F_user_id" property="fUserId" jdbcType="BIGINT"/>
+            <result column="F_sp_id" property="fSpId" jdbcType="BIGINT"/>
+            <result column="F_bank_id" property="fBankId" jdbcType="INTEGER"/>
+            <result column="F_account_no" property="fAccountNo" jdbcType="VARCHAR"/>
+            <result column="F_sub_account" property="fSubAccount" jdbcType="TINYINT"/>
+            <result column="F_status" property="fStatus" jdbcType="TINYINT"/>
+            <result column="F_create_time" property="fCreateTime" jdbcType="TIMESTAMP"/>
+            <result column="F_modify_time" property="fModifyTime" jdbcType="TIMESTAMP"/>
+        </resultMap>-->
+
+    <sql id="Base_Column_List">
+        id, short_link_id,short_link,long_link, create_time , modify_time
+    </sql>
+
+    <select id="selectOneByShortLink" resultType="com.litchi.cool.lohou.link.entity.LinkMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM link_map
+        WHERE short_link = #{shortLink}
+        LIMIT 1;
+    </select>
+
+    <select id="selectLongLinkByShortLink" resultType="string">
+        SELECT long_link
+        FROM link_map
+        WHERE short_link = #{shortLink}
+        LIMIT 1;
+    </select>
+
+    <select id="selectLongLinkByShortLinkId" resultType="string">
+        SELECT long_link
+        FROM link_map
+        WHERE short_link_id = #{shortLinkId}
+        LIMIT 1;
+    </select>
+
+    <insert id="insertOne" parameterType="com.litchi.cool.lohou.link.entity.LinkMap" useGeneratedKeys="true">
+        INSERT INTO link_map(short_link_id, short_link, long_link)
+        VALUES(#{shortLinkId}, #{shortLink}, #{longLink})
+    </insert>
+
+
+</mapper>
